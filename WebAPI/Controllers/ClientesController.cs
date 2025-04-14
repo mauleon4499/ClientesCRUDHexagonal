@@ -1,5 +1,6 @@
 ﻿using Application.DTOs;
 using Application.Interfaces;
+using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,16 +13,19 @@ namespace WebAPI.Controllers
     public class ClientesController : ControllerBase
     {
         private readonly IClienteService _clienteService;
+        private readonly IMapper _mapper;
 
-        public ClientesController(IClienteService clienteService)
+        public ClientesController(IClienteService clienteService, IMapper mapper)
         {
             _clienteService = clienteService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<ActionResult<List<ClienteDTO>>> GetAll()
         {
             var clientes = await _clienteService.ObtenerClientesAsync();
+            var clientesDTO = _mapper.Map<List<ClienteDTO>>(clientes);
             return Ok(clientes);
         }
 
@@ -39,7 +43,8 @@ namespace WebAPI.Controllers
         {
             try
             {
-                await _clienteService.CrearClienteAsync(dto);
+                var cliente = _mapper.Map<Cliente>(dto);
+                await _clienteService.CreateAsync(cliente);
                 return Ok("Cliente creado correctamente");
             }
             catch (Exception ex)
