@@ -11,6 +11,7 @@ namespace Infraestructure.Persistence
     public class AppDbContext : DbContext
     {
         public DbSet<Cliente> Clientes { get; set; }
+        public DbSet<Direccion> Direcciones { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
@@ -28,6 +29,12 @@ namespace Infraestructure.Persistence
                 entity.Property(c => c.Nombre).IsRequired().HasMaxLength(100);
                 entity.Property(c => c.Email).IsRequired().HasMaxLength(100);
             });
+
+            // Configuración de la entidad Direccion
+            modelBuilder.Entity<Direccion>().ToTable("Direccion");
+            modelBuilder.Entity<Direccion>().HasKey(d => d.Id);
+            modelBuilder.Entity<Direccion>().Property(d => d.Calle).IsRequired().HasMaxLength(100);
+
         }
     }
 }

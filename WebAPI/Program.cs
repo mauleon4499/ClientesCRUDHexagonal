@@ -26,11 +26,18 @@ builder.Services.AddAutoMapper(typeof(ClienteProfile));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlite(
-    builder.Configuration.GetConnectionString("WebAPIContext")));
+var connectionString = builder.Configuration.GetConnectionString("WebAPIContext");
 
+builder.Services.AddDbContext<AppDbContext>(options => 
+options.UseMySql(builder.Configuration.GetConnectionString("WebAPIContext"), ServerVersion.AutoDetect(connectionString)));
+
+//CLIENTES
 builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
 builder.Services.AddScoped<IClienteService, ClienteService>();
+
+//DIRECCIONES
+builder.Services.AddScoped<IDireccionRepository, DireccionRepository>();
+builder.Services.AddScoped<IDireccionService, DireccionService>();
 
 var app = builder.Build();
 
