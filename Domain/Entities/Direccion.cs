@@ -14,5 +14,7 @@ namespace Domain.Entities
         public string CP { get; set; }
         public string Ciudad { get; set; }
         public string Provincia { get; set; }
+
+        public ICollection<Cliente> Clientes { get; set; }
     }
 }

@@ -1,6 +1,7 @@
-﻿using Application.Interfaces;
+﻿using Application.DTOs;
+using Application.Interfaces;
+using AutoMapper;
 using Domain.Entities;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
@@ -10,17 +11,21 @@ namespace WebAPI.Controllers
     public class DireccionesController : Controller
     {
         private readonly IDireccionService _direccionService;
+        private readonly IMapper _mapper;
 
-        public DireccionesController(IDireccionService direccionService)
+        public DireccionesController(IDireccionService direccionService, IMapper mapper)
         {
             _direccionService = direccionService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
             var direcciones = await _direccionService.GetAllAsync();
-            return Ok(direcciones);
+            var direccionesDTO = _mapper.Map<IEnumerable<DireccionDTO>>(direcciones);
+
+            return Ok(direccionesDTO);
         }
 
         [HttpGet("{id}")]
@@ -30,23 +35,27 @@ namespace WebAPI.Controllers
             if (direccion == null)
                 return NotFound();
 
-            return Ok(direccion);
+            var direccionDTO = _mapper.Map<DireccionDTO>(direccion);
+            return Ok(direccionDTO);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([FromBody] Direccion direccion)
+        public async Task<IActionResult> Create([FromBody] CrearDireccionDTO crearDireccionDTO)
         {
+            var direccion = _mapper.Map<Direccion>(crearDireccionDTO);
             await _direccionService.CreateAsync(direccion);
             return CreatedAtAction(nameof(GetById), new { id = direccion.Id }, direccion);
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, [FromBody] Direccion direccion)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateDireccionDTO updateDireccionDTO)
         {
-            if (id != direccion.Id)
-                return BadRequest("El ID de la URL no coincide con el del cuerpo");
+            if (id != updateDireccionDTO.Id)
+                return BadRequest("El ID de la dirección no coincide");
 
+            var direccion = _mapper.Map<Direccion>(updateDireccionDTO);
             await _direccionService.UpdateAsync(direccion);
+
             return NoContent();
         }
 

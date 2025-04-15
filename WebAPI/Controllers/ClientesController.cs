@@ -25,8 +25,9 @@ namespace WebAPI.Controllers
         public async Task<ActionResult<List<ClienteDTO>>> GetAll()
         {
             var clientes = await _clienteService.ObtenerClientesAsync();
-            var clientesDTO = _mapper.Map<List<ClienteDTO>>(clientes);
-            return Ok(clientes);
+            var clientesDTO = _mapper.Map<IEnumerable<ClienteDTO>>(clientes);
+
+            return Ok(clientesDTO);
         }
 
         [HttpGet("{id}")]
@@ -35,7 +36,9 @@ namespace WebAPI.Controllers
             var cliente = await _clienteService.GetByIdAsync(id);
             if (cliente == null)
                 return NotFound();
-            return Ok(cliente);
+
+            var clienteDTO = _mapper.Map<ClienteDTO>(cliente);
+            return Ok(clienteDTO);
         }
 
         [HttpPost]
@@ -45,7 +48,7 @@ namespace WebAPI.Controllers
             {
                 var cliente = _mapper.Map<Cliente>(dto);
                 await _clienteService.CreateAsync(cliente);
-                return Ok("Cliente creado correctamente");
+                return CreatedAtAction(nameof(Get), new { id = cliente.Id }, cliente);
             }
             catch (Exception ex)
             {
@@ -54,11 +57,14 @@ namespace WebAPI.Controllers
         }
 
         [HttpPut("{id}")]
-        public async Task<IActionResult> Update(int id, Cliente cliente)
+        public async Task<IActionResult> Update(int id, [FromBody] UpdateClienteDTO updateClienteDTO)
         {
-            if (id != cliente.Id)
-                return BadRequest();
+            if (id != updateClienteDTO.Id)
+                return BadRequest("El Id del cliente no coincide");
+
+            var cliente = _mapper.Map<Cliente>(updateClienteDTO);
             await _clienteService.UpdateAsync(cliente);
+
             return NoContent();
         }
 

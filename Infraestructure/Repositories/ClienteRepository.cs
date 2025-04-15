@@ -27,12 +27,16 @@ namespace Infraestructure.Repositories
 
         public async Task<IEnumerable<Cliente>> GetAllAsync()
         {
-            return await _context.Clientes.ToListAsync();
+            return await _context.Clientes
+                .Include(c => c.Direccion)
+                .ToListAsync();
         }
 
-        public async Task<Cliente> GetByIdAsync(int id)
+        public async Task<Cliente?> GetByIdAsync(int id)
         {
-            return await _context.Clientes.FindAsync(id);
+            return await _context.Clientes
+                .Include(c => c.Direccion)
+                .FirstOrDefaultAsync(c => c.Id == id);
         }
 
         public async Task UpdateAsync(Cliente cliente)

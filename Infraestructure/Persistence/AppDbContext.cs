@@ -12,7 +12,11 @@ namespace Infraestructure.Persistence
     {
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Direccion> Direcciones { get; set; }
-
+        public DbSet<Articulo> Articulos { get; set; }
+        public DbSet<Almacen> Almacenes { get; set; }
+        public DbSet<Ubicacion> Ubicaciones { get; set; }
+        public DbSet<Inventario> Inventarios { get; set; }
+        
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
         }
@@ -28,7 +32,13 @@ namespace Infraestructure.Persistence
                 entity.HasKey(c => c.Id);
                 entity.Property(c => c.Nombre).IsRequired().HasMaxLength(100);
                 entity.Property(c => c.Email).IsRequired().HasMaxLength(100);
+                entity.Property(c => c.IdDireccion).IsRequired().HasColumnName("ID_DIRECCION");
             });
+            modelBuilder.Entity<Cliente>()
+                .HasOne(c => c.Direccion)
+                .WithMany(d => d.Clientes)
+                .HasForeignKey(c => c.IdDireccion)
+                .IsRequired();
 
             // Configuración de la entidad Direccion
             modelBuilder.Entity<Direccion>().ToTable("Direccion");
