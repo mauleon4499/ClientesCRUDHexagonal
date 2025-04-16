@@ -49,6 +49,7 @@
             // 
             // gridClientes
             // 
+            gridClientes.Anchor = System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right;
             gridClientes.Location = new System.Drawing.Point(12, 170);
             gridClientes.MainView = gridView1;
             gridClientes.Name = "gridClientes";

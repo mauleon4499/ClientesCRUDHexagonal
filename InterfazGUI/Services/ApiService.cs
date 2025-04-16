@@ -22,9 +22,8 @@ namespace InterfazGUI.Services
         {
 
             var lista = new List<ObtenerClienteDTO>();
-            var connectionString = AppLogic.CONSTANTES.CONEXION;
 
-            using (var connection = new MySqlConnection(connectionString))
+            using (var connection = new MySqlConnection(AppLogic.CONSTANTES.CONEXION))
             {
                 await connection.OpenAsync();
 
