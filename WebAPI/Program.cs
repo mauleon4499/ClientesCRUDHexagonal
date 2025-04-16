@@ -7,15 +7,19 @@ using Infraestructure.Persistence;
 using Infraestructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Application.Mappings;
-using Application.Validators.Cliente;
-using Application.Validators.Direccion;
-using Application.Validators.Articulo;
 using Application.Validators.Almacen;
-using Application.Validators.Inventario;
-using Application.Validators.Ubicacion;
-using MySqlConnector;
+using AppLogic.Validators.Cliente;
+using AppLogic.Validators.Direccion;
+using AppLogic.Validators.Articulo;
+using AppLogic.Validators.Inventario;
+using AppLogic.Validators.Ubicacion;
+using AppLogic.Mappings;
+using AppLogic.Interfaces;
+using AppLogic.Services;
 
 var builder = WebApplication.CreateBuilder(args);
+
+builder.WebHost.UseUrls("https://localhost:4499");
 
 // Add services to the container.
 

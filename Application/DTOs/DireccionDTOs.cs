@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs
+namespace AppLogic.DTOs
 {
     public class DireccionDTOs
     {
@@ -18,6 +18,8 @@ namespace Application.DTOs
         public string CP { get; set; }
         public string Ciudad { get; set; }
         public string Provincia { get; set; }
+
+        public string DireccionCompleta => $"{Calle}, {Numero}, {CP}, {Ciudad}, {Provincia}";
     }
 
     public class CrearDireccionDTO

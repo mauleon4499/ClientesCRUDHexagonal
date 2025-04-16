@@ -1,7 +1,7 @@
-﻿using Application.DTOs;
+﻿using AppLogic.DTOs;
 using Domain.Entities;
 
-namespace Application.Interfaces
+namespace AppLogic.Interfaces
 {
     public interface IClienteService
     {

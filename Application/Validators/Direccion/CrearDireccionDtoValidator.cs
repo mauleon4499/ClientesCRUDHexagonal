@@ -1,7 +1,7 @@
-﻿using Application.DTOs;
+﻿using AppLogic.DTOs;
 using FluentValidation;
 
-namespace Application.Validators.Direccion
+namespace AppLogic.Validators.Direccion
 {
     public class CrearDireccionDtoValidator : AbstractValidator<CrearDireccionDTO>
     {

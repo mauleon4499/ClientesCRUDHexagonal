@@ -1,8 +1,8 @@
-﻿using Application.DTOs;
+﻿using AppLogic.DTOs;
 using AutoMapper;
 using Domain.Entities;
 
-namespace Application.Mappings
+namespace AppLogic.Mappings
 {
     public class DireccionProfile : Profile
     {

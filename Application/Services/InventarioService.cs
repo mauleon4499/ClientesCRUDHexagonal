@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.DTOs;
-using Application.Interfaces;
+﻿using AppLogic.DTOs;
+using AppLogic.Interfaces;
 using AutoMapper;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Application.Services
+namespace AppLogic.Services
 {
     public class InventarioService : IInventarioService
     {

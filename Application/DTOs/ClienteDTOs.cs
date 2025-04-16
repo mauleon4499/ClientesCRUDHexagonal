@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.DTOs
+namespace AppLogic.DTOs
 {
     public class ClienteDTOs
     {
@@ -15,7 +15,15 @@ namespace Application.DTOs
         public int Id { get; set; }
         public string Nombre { get; set; }
         public string Email { get; set; }
-        public DireccionDTO Direccion { get; set; }
+        public int IdDireccion { get; set; }
+    }
+
+    public class ObtenerClienteDTO
+    {
+        public int Id { get; set; }
+        public string Nombre { get; set; }
+        public string Email { get; set; }
+        public string Direccion { get; set; }
     }
 
     public class CrearClienteDTO

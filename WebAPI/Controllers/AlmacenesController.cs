@@ -1,6 +1,6 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
+﻿using Application.Interfaces;
 using Application.Services;
+using AppLogic.DTOs;
 using AutoMapper;
 using Domain.Entities;
 using Microsoft.AspNetCore.Mvc;

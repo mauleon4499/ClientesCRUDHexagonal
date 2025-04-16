@@ -1,9 +1,9 @@
-﻿using Application.DTOs;
-using Application.Interfaces;
+﻿using AppLogic.DTOs;
+using AppLogic.Interfaces;
 using Domain.Entities;
 using Domain.Interfaces;
 
-namespace Application.Services
+namespace AppLogic.Services
 {
     public class ClienteService : IClienteService
     {

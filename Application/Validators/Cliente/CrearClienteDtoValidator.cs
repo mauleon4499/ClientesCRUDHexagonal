@@ -1,7 +1,7 @@
-﻿using Application.DTOs;
+﻿using AppLogic.DTOs;
 using FluentValidation;
 
-namespace Application.Validators.Cliente
+namespace AppLogic.Validators.Cliente
 {
     public class CrearClienteDtoValidator : AbstractValidator<CrearClienteDTO>
     {

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Application.DTOs;
+﻿using AppLogic.DTOs;
 using AutoMapper;
 using Domain.Entities;
 
-namespace Application.Mappings
+namespace AppLogic.Mappings
 {
     public class InventarioProfile : Profile
     {
